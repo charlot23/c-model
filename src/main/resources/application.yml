@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/cblog_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 334420
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms
+
+logging:
+  level:
+    org.springfromework.web: debug
+  file:
+    name: D:\\log\\Cblog\\log.txt
+  pattern:
+    file: '%d{yyyy/MM/dd-HH:mm:ss}  [%thread] %-5level %logger- %msg%n'
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.cy.cblog.mbg.model,com.cy.cblog.dto
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+# 自定义redis key
+redis:
+  key:
+    prefix:
+      authCode: "charlot:authCode:"
+      jwt: "cblog:jwt:"
+    expire:
+      authCode: 120 # 验证码超期时间
+      jwt: 86400
+      jwt-long: 864000
+
+
+jwt:
+  tokenHeader: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: Bearer
+
+
+
